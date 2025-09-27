@@ -45,19 +45,6 @@ export function DrawingPrompt({
                   }}
                 />
               ) : null}
-              <div
-                className="absolute inset-0 flex flex-col items-center justify-center bg-muted/80 backdrop-blur-sm"
-                style={{ display: imageData ? 'none' : 'flex' }}
-              >
-                <div className="text-center">
-                  <div className="text-4xl font-bold text-primary mb-2 capitalize">
-                    {word}
-                  </div>
-                  <p className="text-sm text-muted-foreground">
-                    Draw your interpretation
-                  </p>
-                </div>
-              </div>
               {imageData && (
                 <div className="absolute bottom-2 left-2 right-2 bg-black/70 text-white text-xs p-2 rounded backdrop-blur-sm">
                   <p className="truncate">
@@ -82,30 +69,6 @@ export function DrawingPrompt({
           )}
         </div>
       </Card>
-
-      <div className="flex justify-center items-center gap-x-2">
-        <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
-          {word}
-        </h3>
-        <Tooltip>
-          <TooltipTrigger>
-            <Button
-              onClick={onRefresh}
-              disabled={isLoading}
-              size="lg"
-              variant="ghost"
-              className="gap-2"
-            >
-              <RefreshCw
-                className={`h-4 w-4 ${isLoading ? 'animate-spin' : ''}`}
-              />
-            </Button>
-          </TooltipTrigger>
-          <TooltipContent>
-            <p>Add to library</p>
-          </TooltipContent>
-        </Tooltip>
-      </div>
 
       <div className="text-center space-y-1 text-muted-foreground">
         <p>🎨 Take your time and enjoy the process</p>

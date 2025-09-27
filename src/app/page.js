@@ -8,8 +8,38 @@ import { Sun } from 'lucide-react';
 import { Moon } from 'lucide-react';
 import { DrawingPrompt } from '@/components/DrawingPrompt';
 import { LineSquiggle } from 'lucide-react';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
+import { RefreshCw } from 'lucide-react';
 
 const HAS_LOGO = true;
+
+const WordLabel = ({ word, onClick, loading, disabled }) => (
+  <div className="flex justify-center items-center gap-x-2">
+    <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
+      {word}
+    </h3>
+    <Tooltip>
+      <TooltipTrigger>
+        <Button
+          onClick={onClick}
+          disabled={disabled}
+          size="lg"
+          variant="ghost"
+          className="gap-2"
+        >
+          <RefreshCw className={`h-4 w-4 ${loading ? 'animate-spin' : ''}`} />
+        </Button>
+      </TooltipTrigger>
+      <TooltipContent>
+        <p>Add to library</p>
+      </TooltipContent>
+    </Tooltip>
+  </div>
+);
 
 export default function Home() {
   const { isDarkMode, toggleTheme } = useTheme();
@@ -69,13 +99,21 @@ export default function Home() {
       </header>
 
       {/* Main Content */}
-      <main className="container mx-auto px-4 py-8">
-        <div className="text-center mb-8">
-          <h2 className="mb-2">Today&apos;s Drawing Prompt</h2>
+      <main className="container flex flex-col mx-auto px-4 py-8 gap-y-5">
+        <div className="flex flex-col text-center gap-y-2">
+          <h2 className="">Today&apos;s Drawing Prompt</h2>
           <p className="text-muted-foreground max-w-md mx-auto">
             Challenge yourself with a new word to draw. Practice your skills and
             develop your artistic style one drawing at a time.
           </p>
+        </div>
+        <div>
+          <WordLabel
+            word={word}
+            onCLick={fetchRandomWord}
+            disabled={wordLoading || imageError}
+            loading={wordLoading || imageLoading}
+          />
         </div>
         <DrawingPrompt
           word={word}
