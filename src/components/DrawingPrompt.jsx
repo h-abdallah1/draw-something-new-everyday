@@ -1,9 +1,8 @@
-import { useState } from 'react';
-import { RefreshCw, Loader2 } from 'lucide-react';
+import { RefreshCw, Loader2, AlertCircle } from 'lucide-react';
 import { Button } from './ui/button';
 import { Card } from './ui/card';
 
-export function DrawingPrompt({ imageUrl, isLoading, onRefresh }) {
+export function DrawingPrompt({ word, isLoading, error, onRefresh }) {
   return (
     <div className="w-full max-w-2xl mx-auto space-y-6">
       <Card className="p-6">
@@ -11,18 +10,27 @@ export function DrawingPrompt({ imageUrl, isLoading, onRefresh }) {
           {isLoading ? (
             <div className="flex flex-col items-center gap-2 text-muted-foreground">
               <Loader2 className="h-8 w-8 animate-spin" />
-              <p>Loading new prompt...</p>
+              <p>Loading new word...</p>
             </div>
-          ) : imageUrl ? (
-            <></>
+          ) : error ? (
+            <div className="flex flex-col items-center gap-2 text-destructive">
+              <AlertCircle className="h-8 w-8" />
+              <p>Failed to load word</p>
+              <p className="text-sm text-muted-foreground">{error}</p>
+            </div>
+          ) : word ? (
+            <div className="text-center">
+              <div className="text-6xl font-bold text-primary mb-4 capitalize">
+                {word}
+              </div>
+              <p className="text-lg text-muted-foreground">
+                Draw your interpretation of a{' '}
+                <span className="font-semibold text-foreground">{word}</span>
+              </p>
+            </div>
           ) : (
-            // <ImageWithFallback
-            //   src={imageUrl}
-            //   alt="Drawing prompt - a random image to inspire your art"
-            //   className="w-full h-full object-cover"
-            // />
             <div className="text-center text-muted-foreground">
-              <p>Click "New Prompt" to get started!</p>
+              <p>Click "New Word" to get started!</p>
             </div>
           )}
         </div>
@@ -36,14 +44,14 @@ export function DrawingPrompt({ imageUrl, isLoading, onRefresh }) {
           className="gap-2"
         >
           <RefreshCw className={`h-4 w-4 ${isLoading ? 'animate-spin' : ''}`} />
-          {isLoading ? 'Loading...' : 'New Prompt'}
+          {isLoading ? 'Loading...' : 'New Word'}
         </Button>
       </div>
 
       <div className="text-center space-y-2 text-muted-foreground">
         <p>🎨 Take your time and enjoy the process</p>
         <p>✏️ Use any medium you like - pencil, paint, digital, etc.</p>
-        <p>🔄 Don't like this one? Hit "New Prompt" for another image</p>
+        <p>🔄 Don't like this word? Hit "New Word" for another prompt</p>
       </div>
     </div>
   );

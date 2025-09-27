@@ -2,6 +2,7 @@
 
 import { Button } from '@/components/ui/button';
 import { useTheme } from '../hooks/useTheme';
+import { useRandomWord } from '../hooks/useRandomWord';
 import { Sun } from 'lucide-react';
 import { Moon } from 'lucide-react';
 import ThemeToggle from '@/components/ThemeToggle';
@@ -11,6 +12,7 @@ const HAS_LOGO = false;
 
 export default function Home() {
   const { isDarkMode, toggleTheme } = useTheme();
+  const { word, isLoading, error, fetchRandomWord } = useRandomWord();
 
   // Debug: Log theme state
   console.log('Current theme:', isDarkMode ? 'dark' : 'light');
@@ -57,11 +59,16 @@ export default function Home() {
         <div className="text-center mb-8">
           <h2 className="mb-2">Today&apos;s Drawing Prompt</h2>
           <p className="text-muted-foreground max-w-md mx-auto">
-            Challenge yourself with a new image to draw. Practice your skills
-            and develop your artistic style one drawing at a time.
+            Challenge yourself with a new word to draw. Practice your skills and
+            develop your artistic style one drawing at a time.
           </p>
         </div>
-        <DrawingPrompt />
+        <DrawingPrompt
+          word={word}
+          isLoading={isLoading}
+          error={error}
+          onRefresh={fetchRandomWord}
+        />
       </main>
 
       {/* Footer */}
