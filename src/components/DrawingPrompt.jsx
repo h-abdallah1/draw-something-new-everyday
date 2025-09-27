@@ -2,6 +2,11 @@ import { RefreshCw, Loader2, AlertCircle } from 'lucide-react';
 import { Button } from './ui/button';
 import { Card } from './ui/card';
 import Image from 'next/image';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
 
 export function DrawingPrompt({
   word,
@@ -78,22 +83,36 @@ export function DrawingPrompt({
         </div>
       </Card>
 
-      <div className="flex justify-center">
-        <Button
-          onClick={onRefresh}
-          disabled={isLoading}
-          size="lg"
-          className="gap-2"
-        >
-          <RefreshCw className={`h-4 w-4 ${isLoading ? 'animate-spin' : ''}`} />
-          {isLoading ? 'Loading...' : 'New Prompt'}
-        </Button>
+      <div className="flex justify-center items-center gap-x-2">
+        <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
+          {word}
+        </h3>
+        <Tooltip>
+          <TooltipTrigger>
+            <Button
+              onClick={onRefresh}
+              disabled={isLoading}
+              size="lg"
+              variant="ghost"
+              className="gap-2"
+            >
+              <RefreshCw
+                className={`h-4 w-4 ${isLoading ? 'animate-spin' : ''}`}
+              />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>Add to library</p>
+          </TooltipContent>
+        </Tooltip>
       </div>
 
-      <div className="text-center space-y-2 text-muted-foreground">
+      <div className="text-center space-y-1 text-muted-foreground">
         <p>🎨 Take your time and enjoy the process</p>
         <p>✏️ Use any medium you like - pencil, paint, digital, etc.</p>
-        <p>🔄 Don't like this prompt? Hit "New Prompt" for another image</p>
+        <p>
+          🔄 Keep drawing, keep improving. Every artist was first an amateur.
+        </p>
       </div>
     </div>
   );

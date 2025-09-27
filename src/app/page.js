@@ -8,8 +8,9 @@ import { Sun } from 'lucide-react';
 import { Moon } from 'lucide-react';
 import ThemeToggle from '@/components/ThemeToggle';
 import { DrawingPrompt } from '@/components/DrawingPrompt';
+import { LineSquiggle } from 'lucide-react';
 
-const HAS_LOGO = false;
+const HAS_LOGO = true;
 
 export default function Home() {
   const { isDarkMode, toggleTheme } = useTheme();
@@ -40,7 +41,9 @@ export default function Home() {
           <div className="flex items-center gap-2">
             {HAS_LOGO && (
               <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-                <span className="text-primary-foreground">🎨</span>
+                <span className="text-primary-foreground">
+                  <LineSquiggle />
+                </span>
               </div>
             )}
             <div>
