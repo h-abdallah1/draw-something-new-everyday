@@ -3,6 +3,7 @@
 import { Button } from '@/components/ui/button';
 import { useTheme } from '../hooks/useTheme';
 import { useRandomWord } from '../hooks/useRandomWord';
+import { useUnsplashImage } from '../hooks/useUnsplashImage';
 import { Sun } from 'lucide-react';
 import { Moon } from 'lucide-react';
 import ThemeToggle from '@/components/ThemeToggle';
@@ -12,7 +13,18 @@ const HAS_LOGO = false;
 
 export default function Home() {
   const { isDarkMode, toggleTheme } = useTheme();
-  const { word, isLoading, error, fetchRandomWord } = useRandomWord();
+  const {
+    word,
+    isLoading: wordLoading,
+    error: wordError,
+    fetchRandomWord,
+  } = useRandomWord();
+  const {
+    imageData,
+    isLoading: imageLoading,
+    error: imageError,
+    fetchImage,
+  } = useUnsplashImage(word);
 
   // Debug: Log theme state
   console.log('Current theme:', isDarkMode ? 'dark' : 'light');
@@ -65,8 +77,9 @@ export default function Home() {
         </div>
         <DrawingPrompt
           word={word}
-          isLoading={isLoading}
-          error={error}
+          imageData={imageData}
+          isLoading={wordLoading || imageLoading}
+          error={wordError || imageError}
           onRefresh={fetchRandomWord}
         />
       </main>
