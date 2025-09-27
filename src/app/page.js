@@ -6,7 +6,6 @@ import { useRandomWord } from '../hooks/useRandomWord';
 import { useUnsplashImage } from '../hooks/useUnsplashImage';
 import { Sun } from 'lucide-react';
 import { Moon } from 'lucide-react';
-import ThemeToggle from '@/components/ThemeToggle';
 import { DrawingPrompt } from '@/components/DrawingPrompt';
 import { LineSquiggle } from 'lucide-react';
 
@@ -90,9 +89,15 @@ export default function Home() {
       {/* Footer */}
       <footer className="border-t bg-muted/50 mt-16">
         <div className="container mx-auto px-4 py-6 text-center text-sm text-muted-foreground">
-          <p>
-            Keep drawing, keep improving. Every artist was first an amateur.
-          </p>
+          <div className="flex flex-row gap-x-2 justify-between items-center">
+            <div>
+              <p>Draw Daily - a project by @habdallah-1 on github</p>
+            </div>
+            <div className="flex flex-row gap-x-5">
+              <a>About</a>
+              <a>Changelog</a>
+            </div>
+          </div>
         </div>
       </footer>
     </div>
