@@ -70,7 +70,26 @@ export function DrawingPrompt({
         </div>
       </Card>
 
-      <div className="text-center space-y-1 text-muted-foreground">
+      <Tooltip>
+        <TooltipTrigger>
+          <Button
+            onClick={onRefresh}
+            disabled={isLoading}
+            size="lg"
+            variant="ghost"
+            className="gap-2"
+          >
+            <RefreshCw
+              className={`h-4 w-4 ${isLoading ? 'animate-spin' : ''}`}
+            />
+          </Button>
+        </TooltipTrigger>
+        <TooltipContent>
+          <p>Add to library</p>
+        </TooltipContent>
+      </Tooltip>
+
+      <div className="text-center space-y-2 text-muted-foreground">
         <p>🎨 Take your time and enjoy the process</p>
         <p>✏️ Use any medium you like - pencil, paint, digital, etc.</p>
         <p>

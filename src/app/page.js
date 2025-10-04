@@ -8,47 +8,27 @@ import { Sun } from 'lucide-react';
 import { Moon } from 'lucide-react';
 import { DrawingPrompt } from '@/components/DrawingPrompt';
 import { LineSquiggle } from 'lucide-react';
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from '@/components/ui/tooltip';
-import { RefreshCw } from 'lucide-react';
 
 const HAS_LOGO = true;
 
 const WordLabel = ({ word, onClick, loading, disabled }) => (
   <div className="flex justify-center items-center gap-x-2">
-    <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
+    <h1 className="scroll-m-20 text-3xl font-semibold tracking-tight">
       {word}
-    </h3>
-    <Tooltip>
-      <TooltipTrigger>
-        <Button
-          onClick={onClick}
-          disabled={disabled}
-          size="lg"
-          variant="ghost"
-          className="gap-2"
-        >
-          <RefreshCw className={`h-4 w-4 ${loading ? 'animate-spin' : ''}`} />
-        </Button>
-      </TooltipTrigger>
-      <TooltipContent>
-        <p>Add to library</p>
-      </TooltipContent>
-    </Tooltip>
+    </h1>
   </div>
 );
 
 export default function Home() {
   const { isDarkMode, toggleTheme } = useTheme();
+
   const {
     word,
     isLoading: wordLoading,
     error: wordError,
     fetchRandomWord,
   } = useRandomWord();
+
   const {
     imageData,
     isLoading: imageLoading,
@@ -107,7 +87,8 @@ export default function Home() {
             develop your artistic style one drawing at a time.
           </p>
         </div>
-        <div>
+
+        <div className="mb-4">
           <WordLabel
             word={word}
             onCLick={fetchRandomWord}
@@ -115,12 +96,13 @@ export default function Home() {
             loading={wordLoading || imageLoading}
           />
         </div>
+
         <DrawingPrompt
           word={word}
           imageData={imageData}
           isLoading={wordLoading || imageLoading}
           error={wordError || imageError}
-          onRefresh={fetchRandomWord}
+          onRefresh={fetchImage}
         />
       </main>
 
